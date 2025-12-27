@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Hariom Shah</title>
+    <meta name="description" content="Learn about Hariom Shah's journey as a Full-Stack Developer & UI/UX Designer. Discover the philosophy and expertise behind the craft.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/splitting@1.0.6/dist/splitting.css">
+    <script src="https://unpkg.com/splitting@1.0.6/dist/splitting.min.js"></script>
+    
+    <!-- Custom Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --charcoal-ink: #1a1a1a;
+            --warm-porcelain: #faf9f7;
+            --sage-mist: #9db5a0;
+            --terracotta-clay: #c4896b;
+            --graphite: #4a4a4a;
+            --cream: #f5f3f0;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--warm-porcelain);
+            color: var(--charcoal-ink);
+            line-height: 1.6;
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--sage-mist), var(--terracotta-clay));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px) rotateX(5deg);
+            box-shadow: 0 20px 40px rgba(26, 26, 26, 0.15);
+        }
+        
+        .btn-primary {
+            background-color: var(--terracotta-clay);
+            color: var(--warm-porcelain);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: #b57a5a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(196, 137, 107, 0.3);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--terracotta-clay);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background-color: var(--terracotta-clay);
+            border-radius: 50%;
+            z-index: 2;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 1.5rem;
+            width: 2px;
+            height: calc(100% + 1rem);
+            background-color: var(--sage-mist);
+            z-index: 1;
+        }
+        
+        .timeline-item:last-child::after {
+            display: none;
+        }
+        
+        .skill-icon {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .skill-icon:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 4rem;
+            color: var(--sage-mist);
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .achievement-badge {
+            background: linear-gradient(135deg, var(--sage-mist), var(--terracotta-clay));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: inline-block;
+            margin: 0.25rem;
+        }
+        
+        .profile-image {
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+        
+        .profile-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="font-display font-semibold text-xl text-gray-900">
+                    Hariom Shah
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link text-gray-900 hover:text-gray-600">Home</a>
+                    <a href="about.html" class="nav-link active text-gray-900 hover:text-gray-600">About</a>
+                    <a href="projects.html" class="nav-link text-gray-900 hover:text-gray-600">Projects</a>
+                    <a href="contact.html" class="nav-link text-gray-900 hover:text-gray-600">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-900 hover:text-gray-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 text-gray-900 hover:text-gray-600">Home</a>
+                <a href="about.html" class="block px-3 py-2 text-gray-900 hover:text-gray-600">About</a>
+                <a href="projects.html" class="block px-3 py-2 text-gray-900 hover:text-gray-600">Projects</a>
+                <a href="contact.html" class="block px-3 py-2 text-gray-900 hover:text-gray-600">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="reveal">
+                    <h1 class="font-display text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                        About <span class="gradient-text">Me</span>
+                    </h1>
+                    <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                        I'm a passionate Full-Stack Developer and UI/UX Designer with over 5 years of experience 
+                        creating digital solutions that bridge the gap between technical excellence and human-centered design.
+                    </p>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        Based in India, I work with clients worldwide to transform ideas into impactful digital 
+                        experiences. My approach combines modern development practices with thoughtful design thinking.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <span class="achievement-badge">React Expert</span>
+                        <span class="achievement-badge">UI/UX Designer</span>
+                        <span class="achievement-badge">Node.js Developer</span>
+                        <span class="achievement-badge">Problem Solver</span>
+                    </div>
+                </div>
+                <div class="reveal">
+                    <div class="relative">
+                        <img src="./resources/profile.jpg" alt="Hariom Shah" class="profile-image w-full max-w-md mx-auto">
+                        <div class="absolute -bottom-6 -right-6 bg-white p-4 rounded-xl shadow-lg">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-gray-900">5+</div>
+                                <div class="text-sm text-gray-600">Years Experience</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section class="py-20" style="background-color: var(--cream);">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="reveal">
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-8">
+                    Design Philosophy
+                </h2>
+                <blockquote class="text-2xl md:text-3xl font-light text-gray-700 italic mb-8 leading-relaxed">
+                    "Great design is not just about making things look beautiful—it's about creating 
+                    meaningful connections between people and technology."
+                </blockquote>
+                <p class="text-lg text-gray-600 leading-relaxed">
+                    I believe that the best digital experiences emerge from the intersection of technical 
+                    precision and human empathy. Every line of code I write and every pixel I place is 
+                    guided by the principle that technology should serve humanity, not the other way around.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Deep Dive -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                    Technical Expertise
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    A comprehensive skill set developed through years of hands-on experience, continuous learning, and real-world project delivery.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Frontend Development -->
+                <div class="card-hover bg-white rounded-2xl p-8 shadow-lg reveal">
+                    <div class="skill-icon mb-6">
+                        <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold text-gray-900 mb-4">Frontend Development</h3>
+                    <p class="text-gray-600 mb-6">
+                        Creating responsive, interactive user interfaces with modern frameworks and best practices.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">React.js</span>
+                            <span class="text-sm text-gray-500">Expert</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">Vue.js</span>
+                            <span class="text-sm text-gray-500">Advanced</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">TypeScript</span>
+                            <span class="text-sm text-gray-500">Advanced</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">Tailwind CSS</span>
+                            <span class="text-sm text-gray-500">Expert</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Backend Development -->
+                <div class="card-hover bg-white rounded-2xl p-8 shadow-lg reveal">
+                    <div class="skill-icon mb-6">
+                        <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold text-gray-900 mb-4">Backend Development</h3>
+                    <p class="text-gray-600 mb-6">
+                        Building scalable server-side applications with robust APIs and database management.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">Node.js</span>
+                            <span class="text-sm text-gray-500">Expert</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">Express.js</span>
+                            <span class="text-sm text-gray-500">Expert</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">Python</span>
+                            <span class="text-sm text-gray-500">Advanced</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">PostgreSQL</span>
+                            <span class="text-sm text-gray-500">Advanced</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- UI/UX Design -->
+                <div class="card-hover bg-white rounded-2xl p-8 shadow-lg reveal">
+                    <div class="skill-icon mb-6">
+                        <svg class="w-8 h-8 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold text-gray-900 mb-4">UI/UX Design</h3>
+                    <p class="text-gray-600 mb-6">
+                        Designing user-centered interfaces that are both beautiful and functional.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">Figma</span>
+                            <span class="text-sm text-gray-500">Expert</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">Adobe XD</span>
+                            <span class="text-sm text-gray-500">Advanced</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">Prototyping</span>
+                            <span class="text-sm text-gray-500">Expert</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">User Research</span>
+                            <span class="text-sm text-gray-500">Advanced</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Timeline -->
+    <section class="py-20" style="background-color: var(--cream);">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                    Professional Journey
+                </h2>
+                <p class="text-xl text-gray-600">
+                    Key milestones in my career as a developer and designer.
+                </p>
+            </div>
+            
+            <div class="space-y-8">
+                <div class="timeline-item reveal">
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                            <h3 class="font-display text-xl font-semibold text-gray-900">Senior Full-Stack Developer</h3>
+                            <span class="text-gray-600 font-medium">2022 - Present</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            Leading development of complex web applications using React, Node.js, and cloud technologies. 
+                            Mentoring junior developers and architecting scalable solutions for enterprise clients.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">React</span>
+                            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Node.js</span>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">AWS</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item reveal">
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                            <h3 class="font-display text-xl font-semibold text-gray-900">UI/UX Designer & Developer</h3>
+                            <span class="text-gray-600 font-medium">2020 - 2022</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            Specialized in creating user-centered designs and implementing them with modern frontend technologies. 
+                            Collaborated with product teams to deliver exceptional user experiences.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-pink-100 text-pink-800 rounded-full text-sm">Figma</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Vue.js</span>
+                            <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item reveal">
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                            <h3 class="font-display text-xl font-semibold text-gray-900">Frontend Developer</h3>
+                            <span class="text-gray-600 font-medium">2019 - 2020</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            Developed responsive web applications and improved website performance. 
+                            Gained expertise in modern JavaScript frameworks and CSS methodologies.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">HTML/CSS</span>
+                            <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">JavaScript</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">SASS</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item reveal">
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                            <h3 class="font-display text-xl font-semibold text-gray-900">Computer Science Degree</h3>
+                            <span class="text-gray-600 font-medium">2015 - 2019</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            Bachelor's degree in Computer Science with focus on software engineering and human-computer interaction. 
+                            Built foundation in programming, algorithms, and design principles.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm">Computer Science</span>
+                            <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm">Software Engineering</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                    What People Say
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Testimonials from clients and colleagues I've had the pleasure to work with.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="testimonial-card reveal">
+                    <p class="text-gray-600 mb-6">
+                        "Hariom delivered exceptional work on our e-commerce platform. His attention to detail and 
+                        technical expertise made the project a huge success."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                        <div>
+                            <div class="font-semibold text-gray-900">Sarah Johnson</div>
+                            <div class="text-sm text-gray-600">CEO, TechStart Inc.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card reveal">
+                    <p class="text-gray-600 mb-6">
+                        "Working with Hariom was a pleasure. He understood our vision and translated it into a 
+                        beautiful, functional design that exceeded our expectations."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                        <div>
+                            <div class="font-semibold text-gray-900">Michael Chen</div>
+                            <div class="text-sm text-gray-600">Product Manager, InnovateLab</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card reveal">
+                    <p class="text-gray-600 mb-6">
+                        "Hariom's technical skills and design sensibility are outstanding. He consistently delivers 
+                        high-quality work and is a joy to collaborate with."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                        <div>
+                            <div class="font-semibold text-gray-900">Emily Rodriguez</div>
+                            <div class="text-sm text-gray-600">Design Director, Creative Solutions</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Personal Touch -->
+    <section class="py-20" style="background-color: var(--cream);">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="reveal">
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-8">
+                    Beyond Code
+                </h2>
+                <p class="text-xl text-gray-600 mb-12 leading-relaxed">
+                    When I'm not building digital experiences, you'll find me exploring new technologies, 
+                    contributing to open-source projects, or sharing knowledge through technical writing and mentoring.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                            <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-gray-900 mb-2">Open Source</h3>
+                        <p class="text-gray-600">Active contributor to React and Node.js ecosystems</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                            <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-gray-900 mb-2">Mentoring</h3>
+                        <p class="text-gray-600">Helping junior developers grow their skills</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                            <svg class="w-8 h-8 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-gray-900 mb-2">Writing</h3>
+                        <p class="text-gray-600">Technical articles and tutorials</p>
+                    </div>
+                </div>
+                
+                <div class="mt-12">
+                    <a href="contact.html" class="btn-primary px-8 py-4 rounded-lg font-semibold text-lg hover:scale-105 transition-transform">
+                        Let's Work Together
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="font-display text-2xl font-semibold mb-4">Hariom Shah</div>
+                <p class="text-gray-400 mb-6">Full-Stack Developer & UI/UX Designer</p>
+                <div class="flex justify-center space-x-6 mb-8">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </a>
+                </div>
+                <p class="text-gray-500 text-sm">
+                    © 2025 Hariom Shah. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>
