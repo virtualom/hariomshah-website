@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Hariom Shah | Engineering Student</title>
+<meta name="description" content="Hariom Shah, an Electronics, Communication & Information Engineering student from Kathmandu, Nepal, learning web development, mobile apps, and UI/UX design.">
+l.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/splitting@1.0.6/dist/splitting.css">
+    <script src="https://unpkg.com/splitting@1.0.6/dist/splitting.min.js"></script>
+    
+    <!-- Custom Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --charcoal-ink: #1a1a1a;
+            --warm-porcelain: #faf9f7;
+            --sage-mist: #9db5a0;
+            --terracotta-clay: #dd5d1c;
+            --graphite: #4a4a4a;
+            --cream: #f5f3f0;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--warm-porcelain);
+            color: var(--charcoal-ink);
+            line-height: 1.6;
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--sage-mist), var(--terracotta-clay));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px) rotateX(5deg);
+            box-shadow: 0 20px 40px rgba(26, 26, 26, 0.15);
+        }
+        
+        .btn-primary {
+            background-color: var(--terracotta-clay);
+            color: var(--warm-porcelain);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: #b57a5a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(196, 137, 107, 0.3);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--terracotta-clay);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .profile-image {
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+        
+        .profile-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+        
+        .achievement-badge {
+            background: linear-gradient(135deg, var(--sage-mist), var(--terracotta-clay));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: inline-block;
+            margin: 0.25rem;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background-color: var(--terracotta-clay);
+            border-radius: 50%;
+            z-index: 2;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 1.5rem;
+            width: 2px;
+            height: calc(100% + 1rem);
+            background-color: var(--sage-mist);
+            z-index: 1;
+        }
+        
+        .timeline-item:last-child::after {
+            display: none;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 4rem;
+            color: var(--sage-mist);
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .philosophy-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .philosophy-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="font-display font-semibold text-xl text-gray-900">
+                    Hariom Shah
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link text-gray-900 hover:text-gray-600">Home</a>
+                    <a href="about.html" class="nav-link active text-gray-900 hover:text-gray-600">About</a>
+                    <a href="education.html" class="nav-link text-gray-900 hover:text-gray-600">Education</a>
+                    <a href="skills.html" class="nav-link text-gray-900 hover:text-gray-600">Skills</a>
+                    <a href="projects.html" class="nav-link text-gray-900 hover:text-gray-600">Projects</a>
+                    <a href="experience.html" class="nav-link text-gray-900 hover:text-gray-600">Experience</a>
+                    <a href="work.html" class="nav-link text-gray-900 hover:text-gray-600">Work</a>
+                    <a href="blog.html" class="nav-link text-gray-900 hover:text-gray-600">Blog</a>
+                    <a href="contact.html" class="nav-link text-gray-900 hover:text-gray-600">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-900 hover:text-gray-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 text-gray-900 hover:text-gray-600">Home</a>
+                <a href="about.html" class="block px-3 py-2 text-gray-900 hover:text-gray-600">About</a>
+                <a href="education.html" class="block px-3 py-2 text-gray-900 hover:text-gray-600">Education</a>
+                <a href="skills.html" class="block px-3 py-2 text-gray-900 hover:text-gray-600">Skills</a>
+                <a href="projects.html" class="block px-3 py-2 text-gray-900 hover:text-gray-600">Projects</a>
+                <a href="experience.html" class="block px-3 py-2 text-gray-900 hover:text-gray-600">Experience</a>
+                <a href="work.html" class="block px-3 py-2 text-gray-900 hover:text-gray-600">Work</a>
+                <a href="blog.html" class="block px-3 py-2 text-gray-900 hover:text-gray-600">Blog</a>
+                <a href="contact.html" class="block px-3 py-2 text-gray-900 hover:text-gray-600">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="reveal">
+                    <h1 class="font-display text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                        About <span class="gradient-text">Me</span>
+                    </h1>
+                    <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                        I am a Future Full-Stack Developer and UI/UX Designer based in Kathmandu, currently pursuing my degree in Electronics and Communication Engineering. With over some of experience in the digital space, I bring a unique perspective to software: the analytical rigor of an engineer combined with the empathy of a designer.
+                    </p>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        I don’t just build interfaces; I build systems. My background in ECI allows me to understand technology from the circuit level up to the cloud, ensuring that every digital solution I create is optimized, scalable, and intuitive.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <span class="achievement-badge">Frontend</span>
+                        <span class="achievement-badge">Backend</span>
+                        <span class="achievement-badge">Design</span>
+                        <span class="achievement-badge">IoT solution</span>
+                        <span class="achievement-badge">Problem Solving </span>
+                    </div>
+                </div>
+                <div class="reveal">
+                    <div class="relative">
+                        <img src="./resources/profile.jpg" alt="Hariom Shah" class="profile-image w-full max-w-md mx-auto">
+                        <div class="absolute -bottom-6 -right-6 bg-white p-4 rounded-xl shadow-lg">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-gray-900">Future</div>
+                                <div class="text-sm text-gray-600">Engineer</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section class="py-20" style="background-color: var(--cream);">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="reveal">
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-8">
+                    Creative Design 
+                </h2>
+                <blockquote class="text-2xl md:text-3xl font-light text-gray-700 italic mb-8 leading-relaxed">
+                    "Great design is not just about making things look beautiful—it's about creating 
+                    meaningful connections between people and technology."
+                </blockquote>
+                <p class="text-lg text-gray-600 leading-relaxed mb-8">
+                    I believe that the best digital experiences emerge from the intersection of technical 
+                    precision and human empathy. Every line of code I write and every pixel I place is 
+                    guided by the principle that technology should serve humanity, not the other way around.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Journey -->
+            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20" style="background-color: var(--cream);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                    What People Say
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                  Real Feedback from Global Collaboration               
+                 </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="testimonial-card reveal">
+                    <p class="text-gray-600 mb-6">
+                        "Working with Hariom  was a game-changer for our platform. His background in Engineering is evident in the way he structures code—everything is logical, optimized, and scalable. He didn't just build a website; he engineered a solution."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                        <div>
+                            <div class="font-semibold text-gray-900">The "Technical Excellence" Testimonial</div>
+                            <div class="text-sm text-gray-600">Startup Founder, USA.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card reveal">
+                    <p class="text-gray-600 mb-6">
+                        " Hariom has a rare talent for making complex technical tools feel simple and beautiful. His UI/UX work transformed our user engagement metrics. He truly understands the 'human' side of technology."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                        <div>
+                            <div class="font-semibold text-gray-900">The "Design & Empathy" Testimonial</div>
+                            <div class="text-sm text-gray-600">Creative Director, UK</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card reveal">
+                    <p class="text-gray-600 mb-6">
+                        "Despite being a full-time Engineering student, Hariom delivers work with the professionalism of a senior developer. His time management and communication are top-tier. A true asset to the Kathmandu tech scene." 
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                        <div>
+                            <div class="font-semibold text-gray-900">The "Reliability" Testimonial (Local/Student Context)</div>
+                            <div class="text-sm text-gray-600">senior Developer, Nepal with."</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Personal Touch -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                    Beyond Code
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    When I'm not building digital experiences, you'll find me exploring new technologies, 
+                    contributing to open-source projects, or sharing knowledge through technical writing and mentoring.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="philosophy-card reveal">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Open Source</h3>
+                    <p class="text-gray-600"></p>
+                </div>
+                
+                <div class="philosophy-card reveal">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Mentoring</h3>
+                    <p class="text-gray-600"></p>
+                </div>
+                
+                <div class="philosophy-card reveal">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Writing</h3>
+                    <p class="text-gray-600"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20" style="background-color: var(--cream);">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="reveal">
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                    Let’s Build the Future Together
+                </h2>
+                <p class="text-xl text-gray-600 mb-12">
+                    
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="contact.html" class="btn-primary px-8 py-4 rounded-lg font-semibold text-lg hover:scale-105 transition-transform">
+                        Share Your Ideas
+                    </a>
+                    <a href="work.html" class="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-lg font-semibold text-lg hover:scale-105 transition-transform">
+                        View My Work
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="font-display text-2xl font-semibold mb-4">Hariom Shah</div>
+                <p class="text-gray-400 mb-2">Engineering Student</p>
+                <p class="text-gray-400 mb-6">📍 Kathmandu, Nepal | ✉️ hariomshah30@gmail.com</p>
+                <div class="flex justify-center space-x-6 mb-8">
+                    <a href="mailto:hariomshah30@gmail.com" class="text-gray-400 hover:text-white transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </a>
+                </div>
+                <p class="text-gray-500 text-sm">
+                    © 2026 Hariom Shah. All rights reserved.
+                         <p class="text-gray-500 text-sm"></p>
+                     Designed & Developed by Self
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>

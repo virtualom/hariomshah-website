@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Hariom Shah</title>
+    <meta name="description" content="Read Hariom Shah's insights on web development, technology trends, and digital innovation. Stay updated with the latest in full-stack development.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/splitting@1.0.6/dist/splitting.css">
+    <script src="https://unpkg.com/splitting@1.0.6/dist/splitting.min.js"></script>
+    
+    <!-- Custom Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --charcoal-ink: #1a1a1a;
+            --warm-porcelain: #faf9f7;
+            --sage-mist: #9db5a0;
+            --terracotta-clay: #c4896b;
+            --graphite: #4a4a4a;
+            --cream: #f5f3f0;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--warm-porcelain);
+            color: var(--charcoal-ink);
+            line-height: 1.6;
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--sage-mist), var(--terracotta-clay));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .btn-primary {
+            background-color: var(--terracotta-clay);
+            color: var(--warm-porcelain);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: #b57a5a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(196, 137, 107, 0.3);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--terracotta-clay);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .blog-card {
+            background: white;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .blog-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--sage-mist), var(--terracotta-clay));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .blog-content {
+            padding: 1.5rem;
+        }
+        
+        .blog-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            color: var(--graphite);
+        }
+        
+        .blog-tag {
+            background: var(--cream);
+            color: var(--graphite);
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            display: inline-block;
+            margin: 0.125rem;
+        }
+        
+        .featured-post {
+            background: linear-gradient(135deg, var(--sage-mist), var(--terracotta-clay));
+            color: white;
+            border-radius: 2rem;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 3rem;
+        }
+        
+        .featured-post::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .newsletter-signup {
+            background: var(--cream);
+            border-radius: 2rem;
+            padding: 3rem;
+            text-align: center;
+            margin: 3rem 0;
+        }
+        
+        .search-box {
+            background: white;
+            border-radius: 2rem;
+            padding: 1rem 2rem;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .search-box:focus {
+            outline: none;
+            border-color: var(--terracotta-clay);
+            box-shadow: 0 0 0 4px rgba(196, 137, 107, 0.1);
+        }
+        
+        .category-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        
+        .filter-btn {
+            background: white;
+            border: 2px solid var(--cream);
+            color: var(--graphite);
+            padding: 0.5rem 1.5rem;
+            border-radius: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--terracotta-clay);
+            border-color: var(--terracotta-clay);
+            color: white;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 3rem 0;
+        }
+        
+        .page-btn {
+            background: white;
+            border: 2px solid var(--cream);
+            color: var(--graphite);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .page-btn:hover,
+        .page-btn.active {
+            background: var(--terracotta-clay);
+            border-color: var(--terracotta-clay);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="font-display font-semibold text-xl text-gray-900">
+                    Hariom Shah
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link active text-gray-900 hover:text-gray-600">Home</a>
+                    <a href="about.html" class="nav-link text-gray-900 hover:text-gray-600">About</a>
+                    <a href="education.html" class="nav-link text-gray-900 hover:text-gray-600">Education</a>
+                    <a href="skills.html" class="nav-link text-gray-900 hover:text-gray-600">Skills</a>
+                    <a href="projects.html" class="nav-link text-gray-900 hover:text-gray-600">Projects</a>
+                    <a href="experience.html" class="nav-link text-gray-900 hover:text-gray-600">Experience</a>
+                    <a href="work.html" class="nav-link text-gray-900 hover:text-gray-600">Work</a>
+                    <a href="blog.html" class="nav-link text-gray-900 hover:text-gray-600">Blog</a>
+                    <a href="contact.html" class="nav-link text-gray-900 hover:text-gray-600">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-900 hover:text-gray-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 text-gray-900 hover:text-gray-600">Home</a>
+                <a href="about.html" class="block px-3 py-2 text-gray-900 hover:text-gray-600">About</a>
+                <a href="education.html" class="block px-3 py-2 text-gray-900 hover:text-gray-600">Education</a>
+                <a href="skills.html" class="block px-3 py-2 text-gray-900 hover:text-gray-600">Skills</a>
+                <a href="projects.html" class="block px-3 py-2 text-gray-900 hover:text-gray-600">Projects</a>
+                <a href="experience.html" class="block px-3 py-2 text-gray-900 hover:text-gray-600">Experience</a>
+                <a href="work.html" class="block px-3 py-2 text-gray-900 hover:text-gray-600">Work</a>
+                <a href="blog.html" class="block px-3 py-2 text-gray-900 hover:text-gray-600">Blog</a>
+                <a href="contact.html" class="block px-3 py-2 text-gray-900 hover:text-gray-600">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="reveal">
+                <h1 class="font-display text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                    Thoughts & <span class="gradient-text">Insights</span>
+                </h1>
+                <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+                    Exploring web development, technology trends, and digital innovation. 
+                    Sharing my journey and learnings in the world of full-stack development.
+                </p>
+                <div class="flex justify-center">
+                    <input type="text" placeholder="Search articles..." class="search-box">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Post -->
+    <section class="py-20" style="background-color: var(--cream);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="featured-post reveal">
+                <div class="relative z-10">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Featured</span>
+                        <span class="text-sm opacity-75">December 15, 2024</span>
+                    </div>
+                    <h2 class="font-display text-3xl md:text-4xl font-bold mb-4">
+                        The Future of Web Development: Trends to Watch in 2025
+                    </h2>
+                    <p class="text-lg mb-6 opacity-90 leading-relaxed">
+                        Exploring the latest trends in web development including AI integration, WebAssembly, 
+                        and the evolution of JavaScript frameworks. What developers need to know for the coming year.
+                    </p>
+                    <a href="#" class="bg-white text-gray-900 px-6 py-3 rounded-full font-semibold inline-block hover:bg-gray-100 transition-colors">
+                        Read Article
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Filters -->
+    <section class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="category-filter reveal">
+                <button class="filter-btn active">All</button>
+                <button class="filter-btn">Web Development</button>
+                <button class="filter-btn">JavaScript</button>
+                <button class="filter-btn">React</button>
+                <button class="filter-btn">UI/UX Design</button>
+                <button class="filter-btn">Career</button>
+                <button class="filter-btn">Tutorial</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Posts Grid -->
+    <section class="py-20" style="background-color: var(--cream);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Blog Post 1 -->
+                <div class="blog-card reveal">
+                    <div class="blog-image">🚀</div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span>December 12, 2024</span>
+                            <span>5 min read</span>
+                        </div>
+                        <h3 class="font-display text-xl font-semibold text-gray-900 mb-3">
+                            Building Scalable React Applications: Best Practices
+                        </h3>
+                        <p class="text-gray-600 text-sm mb-4">
+                            Learn how to structure large React applications for maintainability and performance. 
+                            Includes code organization, state management, and optimization techniques.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="blog-tag">React</span>
+                            <span class="blog-tag">JavaScript</span>
+                            <span class="blog-tag">Tutorial</span>
+                        </div>
+                        <a href="#" class="text-terracotta-clay font-medium hover:underline">Read More →</a>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 2 -->
+                <div class="blog-card reveal">
+                    <div class="blog-image">🎨</div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span>December 10, 2024</span>
+                            <span>8 min read</span>
+                        </div>
+                        <h3 class="font-display text-xl font-semibold text-gray-900 mb-3">
+                            Modern CSS Techniques Every Developer Should Know
+                        </h3>
+                        <p class="text-gray-600 text-sm mb-4">
+                            Explore modern CSS features like Grid, Flexbox, Custom Properties, and more. 
+                            Practical examples and use cases for building responsive layouts.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="blog-tag">CSS</span>
+                            <span class="blog-tag">Web Development</span>
+                            <span class="blog-tag">Tutorial</span>
+                        </div>
+                        <a href="#" class="text-terracotta-clay font-medium hover:underline">Read More →</a>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 3 -->
+                <div class="blog-card reveal">
+                    <div class="blog-image">⚡</div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span>December 8, 2024</span>
+                            <span>6 min read</span>
+                        </div>
+                        <h3 class="font-display text-xl font-semibold text-gray-900 mb-3">
+                            Node.js Performance Optimization: Tips and Tricks
+                        </h3>
+                        <p class="text-gray-600 text-sm mb-4">
+                            Improve your Node.js application performance with these proven optimization techniques. 
+                            From database queries to memory management.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="blog-tag">Node.js</span>
+                            <span class="blog-tag">Backend</span>
+                            <span class="blog-tag">Performance</span>
+                        </div>
+                        <a href="#" class="text-terracotta-clay font-medium hover:underline">Read More →</a>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 4 -->
+                <div class="blog-card reveal">
+                    <div class="blog-image">🔧</div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span>December 5, 2024</span>
+                            <span>4 min read</span>
+                        </div>
+                        <h3 class="font-display text-xl font-semibold text-gray-900 mb-3">
+                            Essential VS Code Extensions for Web Developers
+                        </h3>
+                        <p class="text-gray-600 text-sm mb-4">
+                            Boost your productivity with these must-have VS Code extensions. 
+                            From code formatting to debugging tools and everything in between.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="blog-tag">Tools</span>
+                            <span class="blog-tag">Productivity</span>
+                            <span class="blog-tag">Web Development</span>
+                        </div>
+                        <a href="#" class="text-terracotta-clay font-medium hover:underline">Read More →</a>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 5 -->
+                <div class="blog-card reveal">
+                    <div class="blog-image">📱</div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span>December 3, 2024</span>
+                            <span>7 min read</span>
+                        </div>
+                        <h3 class="font-display text-xl font-semibold text-gray-900 mb-3">
+                            Mobile-First Design: Principles and Best Practices
+                        </h3>
+                        <p class="text-gray-600 text-sm mb-4">
+                            Master the art of mobile-first design with practical tips and real-world examples. 
+                            Create websites that work beautifully on all devices.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="blog-tag">UI/UX</span>
+                            <span class="blog-tag">Design</span>
+                            <span class="blog-tag">Mobile</span>
+                        </div>
+                        <a href="#" class="text-terracotta-clay font-medium hover:underline">Read More →</a>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 6 -->
+                <div class="blog-card reveal">
+                    <div class="blog-image">🎯</div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span>December 1, 2024</span>
+                            <span>5 min read</span>
+                        </div>
+                        <h3 class="font-display text-xl font-semibold text-gray-900 mb-3">
+                            Career Growth Tips for Junior Developers
+                        </h3>
+                        <p class="text-gray-600 text-sm mb-4">
+                            Practical advice for advancing your development career. From skill building 
+                            to networking and finding mentorship opportunities.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="blog-tag">Career</span>
+                            <span class="blog-tag">Advice</span>
+                            <span class="blog-tag">Growth</span>
+                        </div>
+                        <a href="#" class="text-terracotta-clay font-medium hover:underline">Read More →</a>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 7 -->
+                <div class="blog-card reveal">
+                    <div class="blog-image">🔒</div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span>November 28, 2024</span>
+                            <span>9 min read</span>
+                        </div>
+                        <h3 class="font-display text-xl font-semibold text-gray-900 mb-3">
+                            Web Security Best Practices for Modern Applications
+                        </h3>
+                        <p class="text-gray-600 text-sm mb-4">
+                            Protect your web applications with these essential security practices. 
+                            Covers authentication, data protection, and common vulnerabilities.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="blog-tag">Security</span>
+                            <span class="blog-tag">Best Practices</span>
+                            <span class="blog-tag">Tutorial</span>
+                        </div>
+                        <a href="#" class="text-terracotta-clay font-medium hover:underline">Read More →</a>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 8 -->
+                <div class="blog-card reveal">
+                    <div class="blog-image">☁️</div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span>November 25, 2024</span>
+                            <span>6 min read</span>
+                        </div>
+                        <h3 class="font-display text-xl font-semibold text-gray-900 mb-3">
+                            Getting Started with AWS for Web Developers
+                        </h3>
+                        <p class="text-gray-600 text-sm mb-4">
+                            A beginner's guide to AWS services for web development. Learn about EC2, S3, 
+                            Lambda, and other essential services for modern web applications.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="blog-tag">AWS</span>
+                            <span class="blog-tag">Cloud</span>
+                            <span class="blog-tag">Tutorial</span>
+                        </div>
+                        <a href="#" class="text-terracotta-clay font-medium hover:underline">Read More →</a>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 9 -->
+                <div class="blog-card reveal">
+                    <div class="blog-image">🤖</div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span>November 22, 2024</span>
+                            <span>8 min read</span>
+                        </div>
+                        <h3 class="font-display text-xl font-semibold text-gray-900 mb-3">
+                            Integrating AI into Web Applications: A Practical Guide
+                        </h3>
+                        <p class="text-gray-600 text-sm mb-4">
+                            Learn how to add AI capabilities to your web applications. Explore APIs, 
+                            machine learning models, and practical implementation strategies.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="blog-tag">AI</span>
+                            <span class="blog-tag">JavaScript</span>
+                            <span class="blog-tag">Innovation</span>
+                        </div>
+                        <a href="#" class="text-terracotta-clay font-medium hover:underline">Read More →</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination reveal">
+                <button class="page-btn">← Previous</button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn">Next →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="newsletter-signup reveal">
+                <h2 class="font-display text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Stay Updated
+                </h2>
+                <p class="text-lg text-gray-600 mb-8">
+                    Get the latest articles, tutorials, and insights delivered to your inbox. 
+                    Never miss out on new content and industry updates.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                    <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-3 rounded-full border-2 border-gray-200 focus:border-terracotta-clay focus:outline-none">
+                    <button class="btn-primary px-6 py-3 rounded-full font-semibold whitespace-nowrap">
+                        Subscribe
+                    </button>
+                </div>
+                
+                <p class="text-sm text-gray-500 mt-4">
+                    No spam, unsubscribe at any time. Privacy policy applies.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="font-display text-2xl font-semibold mb-4">Hariom Shah</div>
+                <p class="text-gray-400 mb-6">Full-Stack Developer & UI/UX Designer</p>
+                <div class="flex justify-center space-x-6 mb-8">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </a>
+                </div>
+                <p class="text-gray-500 text-sm">
+                    © 2026 Hariom Shah. All rights reserved.
+                        <p class="text-gray-500 text-sm"></p>
+                     Designed & Developed by Self
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>

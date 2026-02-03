@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work - Hariom Shah</title>
+    <meta name="description" content="Explore Hariom Shah's work process, methodologies, and approach to delivering high-quality digital solutions.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/splitting@1.0.6/dist/splitting.css">
+    <script src="https://unpkg.com/splitting@1.0.6/dist/splitting.min.js"></script>
+    
+    <!-- Custom Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --charcoal-ink: #1a1a1a;
+            --warm-porcelain: #faf9f7;
+            --sage-mist: #9db5a0;
+            --terracotta-clay: #c4896b;
+            --graphite: #4a4a4a;
+            --cream: #f5f3f0;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--warm-porcelain);
+            color: var(--charcoal-ink);
+            line-height: 1.6;
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--sage-mist), var(--terracotta-clay));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .btn-primary {
+            background-color: var(--terracotta-clay);
+            color: var(--warm-porcelain);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: #b57a5a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(196, 137, 107, 0.3);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--terracotta-clay);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .process-step {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            text-align: center;
+        }
+        
+        .process-step:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .step-number {
+            background: linear-gradient(135deg, var(--sage-mist), var(--terracotta-clay));
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+        
+        .methodology-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--terracotta-clay);
+        }
+        
+        .methodology-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+        
+        .tool-badge {
+            background: var(--cream);
+            color: var(--graphite);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: inline-block;
+            margin: 0.25rem;
+        }
+        
+        .philosophy-card {
+            background: linear-gradient(135deg, var(--sage-mist), var(--terracotta-clay));
+            color: white;
+            border-radius: 2rem;
+            padding: 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .philosophy-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .workflow-item {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--sage-mist);
+        }
+        
+        .workflow-item:hover {
+            transform: translateX(8px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--terracotta-clay);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--graphite);
+            font-size: 1rem;
+        }
+        
+        .quote-card {
+            background: var(--cream);
+            border-radius: 2rem;
+            padding: 3rem;
+            text-align: center;
+            position: relative;
+            margin: 2rem 0;
+        }
+        
+        .quote-card::before {
+            content: '"';
+            font-size: 6rem;
+            color: var(--sage-mist);
+            position: absolute;
+            top: -1rem;
+            left: 2rem;
+            font-family: serif;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="font-display font-semibold text-xl text-gray-900">
+                    Hariom Shah
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link text-gray-900 hover:text-gray-600">Home</a>
+                    <a href="about.html" class="nav-link active text-gray-900 hover:text-gray-600">About</a>
+                    <a href="education.html" class="nav-link text-gray-900 hover:text-gray-600">Education</a>
+                    <a href="skills.html" class="nav-link text-gray-900 hover:text-gray-600">Skills</a>
+                    <a href="projects.html" class="nav-link text-gray-900 hover:text-gray-600">Projects</a>
+                    <a href="experience.html" class="nav-link text-gray-900 hover:text-gray-600">Experience</a>
+                    <a href="work.html" class="nav-link text-gray-900 hover:text-gray-600">Work</a>
+                    <a href="blog.html" class="nav-link text-gray-900 hover:text-gray-600">Blog</a>
+                    <a href="contact.html" class="nav-link text-gray-900 hover:text-gray-600">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-900 hover:text-gray-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 text-gray-900 hover:text-gray-600">Home</a>
+                <a href="about.html" class="block px-3 py-2 text-gray-900 hover:text-gray-600">About</a>
+                <a href="education.html" class="block px-3 py-2 text-gray-900 hover:text-gray-600">Education</a>
+                <a href="skills.html" class="block px-3 py-2 text-gray-900 hover:text-gray-600">Skills</a>
+                <a href="projects.html" class="block px-3 py-2 text-gray-900 hover:text-gray-600">Projects</a>
+                <a href="experience.html" class="block px-3 py-2 text-gray-900 hover:text-gray-600">Experience</a>
+                <a href="work.html" class="block px-3 py-2 text-gray-900 hover:text-gray-600">Work</a>
+                <a href="blog.html" class="block px-3 py-2 text-gray-900 hover:text-gray-600">Blog</a>
+                <a href="contact.html" class="block px-3 py-2 text-gray-900 hover:text-gray-600">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="reveal">
+                <h1 class="font-display text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                    How I <span class="gradient-text">Work</span>
+                </h1>
+                <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+                    My approach to building exceptional digital experiences through structured processes, 
+                    modern methodologies, and continuous collaboration.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Stats -->
+    <section class="py-20" style="background-color: var(--cream);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="stats-grid">
+                <div class="stat-item reveal">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Client Satisfaction</span>
+                </div>
+                <div class="stat-item reveal">
+                    <span class="stat-number">95%</span>
+                    <span class="stat-label">On-Time Delivery</span>
+                </div>
+                <div class="stat-item reveal">
+                    <span class="stat-number">40%</span>
+                    <span class="stat-label">Faster Delivery</span>
+                </div>
+                <div class="stat-item reveal">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Support Available</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- My Process -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                    My Development Process
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    A systematic approach to building digital solutions that ensures quality, efficiency, and client satisfaction.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="process-step reveal">
+                    <div class="step-number">1</div>
+                    <h3 class="font-semibold text-gray-900 mb-3">Discovery & Planning</h3>
+                    <p class="text-gray-600 text-sm">
+                        Understanding requirements, analyzing business needs, and creating a comprehensive project roadmap.
+                    </p>
+                </div>
+                
+                <div class="process-step reveal">
+                    <div class="step-number">2</div>
+                    <h3 class="font-semibold text-gray-900 mb-3">Design & Prototyping</h3>
+                    <p class="text-gray-600 text-sm">
+                        Creating user-centered designs, wireframes, and interactive prototypes to visualize the solution.
+                    </p>
+                </div>
+                
+                <div class="process-step reveal">
+                    <div class="step-number">3</div>
+                    <h3 class="font-semibold text-gray-900 mb-3">Development & Testing</h3>
+                    <p class="text-gray-600 text-sm">
+                        Building the application using modern technologies with continuous testing and quality assurance.
+                    </p>
+                </div>
+                
+                <div class="process-step reveal">
+                    <div class="step-number">4</div>
+                    <h3 class="font-semibold text-gray-900 mb-3">Deployment & Support</h3>
+                    <p class="text-gray-600 text-sm">
+                        Launching the application with proper deployment strategies and providing ongoing maintenance.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methodologies -->
+    <section class="py-20" style="background-color: var(--cream);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                    Development Methodologies
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Modern approaches and best practices I follow to deliver high-quality solutions.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="methodology-card reveal">
+                    <div class="text-4xl mb-4">🚀</div>
+                    <h3 class="font-semibold text-gray-900 mb-3">Agile Development</h3>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Iterative development with regular sprints, continuous feedback, and adaptive planning.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tool-badge">Scrum</span>
+                        <span class="tool-badge">Sprints</span>
+                        <span class="tool-badge">Standups</span>
+                    </div>
+                </div>
+                
+                <div class="methodology-card reveal">
+                    <div class="text-4xl mb-4">🔄</div>
+                    <h3 class="font-semibold text-gray-900 mb-3">CI/CD Pipeline</h3>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Automated testing, continuous integration, and seamless deployment processes.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tool-badge">GitHub Actions</span>
+                        <span class="tool-badge">Jest</span>
+                        <span class="tool-badge">Docker</span>
+                    </div>
+                </div>
+                
+                <div class="methodology-card reveal">
+                    <div class="text-4xl mb-4">🧪</div>
+                    <h3 class="font-semibold text-gray-900 mb-3">Test-Driven Development</h3>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Writing tests before code to ensure reliability and maintainability.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tool-badge">Jest</span>
+                        <span class="tool-badge">Cypress</span>
+                        <span class="tool-badge">Unit Tests</span>
+                    </div>
+                </div>
+                
+                <div class="methodology-card reveal">
+                    <div class="text-4xl mb-4">👥</div>
+                    <h3 class="font-semibold text-gray-900 mb-3">Code Reviews</h3>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Peer reviews to maintain code quality and knowledge sharing.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tool-badge">GitHub</span>
+                        <span class="tool-badge">PR Reviews</span>
+                        <span class="tool-badge">Quality</span>
+                    </div>
+                </div>
+                
+                <div class="methodology-card reveal">
+                    <div class="text-4xl mb-4">📊</div>
+                    <h3 class="font-semibold text-gray-900 mb-3">Performance Monitoring</h3>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Continuous monitoring and optimization for speed and user experience.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tool-badge">Lighthouse</span>
+                        <span class="tool-badge">Analytics</span>
+                        <span class="tool-badge">Optimization</span>
+                    </div>
+                </div>
+                
+                <div class="methodology-card reveal">
+                    <div class="text-4xl mb-4">🔒</div>
+                    <h3 class="font-semibold text-gray-900 mb-3">Security First</h3>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Implementing security best practices from the start of development.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tool-badge">HTTPS</span>
+                        <span class="tool-badge">Auth</span>
+                        <span class="tool-badge">Validation</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workflow -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                    Daily Workflow
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    A glimpse into my typical workday and how I maintain productivity and quality.
+                </p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="workflow-item reveal">
+                    <div class="flex items-center mb-2">
+                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                            <span class="text-blue-600 font-semibold text-sm">1</span>
+                        </div>
+                        <h3 class="font-semibold text-gray-900">Morning Planning (9:00 AM)</h3>
+                    </div>
+                    <p class="text-gray-600 text-sm pl-11">
+                        Review tasks, prioritize work, and plan the day's objectives. Check project status and communicate with team members.
+                    </p>
+                </div>
+                
+                <div class="workflow-item reveal">
+                    <div class="flex items-center mb-2">
+                        <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                            <span class="text-green-600 font-semibold text-sm">2</span>
+                        </div>
+                        <h3 class="font-semibold text-gray-900">Development Block (10:00 AM - 12:00 PM)</h3>
+                    </div>
+                    <p class="text-gray-600 text-sm pl-11">
+                        Focused coding time with minimal distractions. Work on feature implementation, bug fixes, or code reviews.
+                    </p>
+                </div>
+                
+                <div class="workflow-item reveal">
+                    <div class="flex items-center mb-2">
+                        <div class="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center mr-3">
+                            <span class="text-yellow-600 font-semibold text-sm">3</span>
+                        </div>
+                        <h3 class="font-semibold text-gray-900">Collaboration (1:00 PM - 3:00 PM)</h3>
+                    </div>
+                    <p class="text-gray-600 text-sm pl-11">
+                        Team meetings, client calls, code reviews, and collaborative problem-solving sessions.
+                    </p>
+                </div>
+                
+                <div class="workflow-item reveal">
+                    <div class="flex items-center mb-2">
+                        <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-3">
+                            <span class="text-purple-600 font-semibold text-sm">4</span>
+                        </div>
+                        <h3 class="font-semibold text-gray-900">Afternoon Development (3:00 PM - 5:00 PM)</h3>
+                    </div>
+                    <p class="text-gray-600 text-sm pl-11">
+                        Continue development work, implement feedback from reviews, and prepare for next day's tasks.
+                    </p>
+                </div>
+                
+                <div class="workflow-item reveal">
+                    <div class="flex items-center mb-2">
+                        <div class="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center mr-3">
+                            <span class="text-red-600 font-semibold text-sm">5</span>
+                        </div>
+                        <h3 class="font-semibold text-gray-900">Wrap-up (5:00 PM - 6:00 PM)</h3>
+                    </div>
+                    <p class="text-gray-600 text-sm pl-11">
+                        Update project status, document progress, plan next day's work, and communicate updates to stakeholders.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Philosophy -->
+    <section class="py-20" style="background-color: var(--cream);">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="philosophy-card reveal">
+                <h2 class="font-display text-3xl md:text-4xl font-bold mb-6">
+                    My Work Philosophy
+                </h2>
+                <p class="text-lg mb-8 leading-relaxed">
+                    I believe in delivering not just code, but comprehensive solutions that drive business value. 
+                    Every project is an opportunity to learn, innovate, and create something meaningful.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold mb-2">Quality First</h3>
+                        <p class="text-sm opacity-90">Never compromise on code quality and user experience</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        < <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold mb-2">Continuous Improvement</h3>
+                        <p class="text-sm opacity-90">Always learning and adapting to new technologies</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold mb-2">Client Success</h3>
+                        <p class="text-sm opacity-90">Focused on delivering measurable business results</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools & Technologies -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                    Tools & Technologies
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    The modern toolkit I use to build, deploy, and maintain high-quality applications.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                <div class="text-center reveal">
+                    <div class="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <span class="text-2xl">⚛️</span>
+                    </div>
+                    <h4 class="font-medium text-gray-900 text-sm">React</h4>
+                </div>
+                
+                <div class="text-center reveal">
+                    <div class="w-16 h-16 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <span class="text-2xl">🟢</span>
+                    </div>
+                    <h4 class="font-medium text-gray-900 text-sm">Node.js</h4>
+                </div>
+                
+                <div class="text-center reveal">
+                    <div class="w-16 h-16 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <span class="text-2xl">🎨</span>
+                    </div>
+                    <h4 class="font-medium text-gray-900 text-sm">Figma</h4>
+                </div>
+                
+                <div class="text-center reveal">
+                    <div class="w-16 h-16 bg-orange-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <span class="text-2xl">🐳</span>
+                    </div>
+                    <h4 class="font-medium text-gray-900 text-sm">Docker</h4>
+                </div>
+                
+                <div class="text-center reveal">
+                    <div class="w-16 h-16 bg-yellow-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <span class="text-2xl">☁️</span>
+                    </div>
+                    <h4 class="font-medium text-gray-900 text-sm">AWS</h4>
+                </div>
+                
+                <div class="text-center reveal">
+                    <div class="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <span class="text-2xl">🐙</span>
+                    </div>
+                    <h4 class="font-medium text-gray-900 text-sm">GitHub</h4>
+                </div>
+                
+                <div class="text-center reveal">
+                    <div class="w-16 h-16 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <span class="text-2xl">🗄️</span>
+                    </div>
+                    <h4 class="font-medium text-gray-900 text-sm">PostgreSQL</h4>
+                </div>
+                
+                <div class="text-center reveal">
+                    <div class="w-16 h-16 bg-indigo-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <span class="text-2xl">📱</span>
+                    </div>
+                    <h4 class="font-medium text-gray-900 text-sm">Responsive</h4>
+                </div>
+                
+                <div class="text-center reveal">
+                    <div class="w-16 h-16 bg-pink-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <span class="text-2xl">🚀</span>
+                    </div>
+                    <h4 class="font-medium text-gray-900 text-sm">Vercel</h4>
+                </div>
+                
+                <div class="text-center reveal">
+                    <div class="w-16 h-16 bg-teal-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <span class="text-2xl">🧪</span>
+                    </div>
+                    <h4 class="font-medium text-gray-900 text-sm">Jest</h4>
+                </div>
+                
+                <div class="text-center reveal">
+                    <div class="w-16 h-16 bg-cyan-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <span class="text-2xl">📊</span>
+                    </div>
+                    <h4 class="font-medium text-gray-900 text-sm">Analytics</h4>
+                </div>
+                
+                <div class="text-center reveal">
+                    <div class="w-16 h-16 bg-lime-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <span class="text-2xl">🔧</span>
+                    </div>
+                    <h4 class="font-medium text-gray-900 text-sm">Webpack</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20" style="background-color: var(--cream);">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="reveal">
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                    Ready to Work Together?
+                </h2>
+                <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                    Let's discuss your project and create something amazing together. 
+                    I'm always excited to take on new challenges and deliver exceptional results.
+                </p>
+                <a href="contact.html" class="btn-primary px-8 py-4 rounded-full text-lg font-semibold inline-block">
+                    Start Your Project
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="font-display text-2xl font-semibold mb-4">Hariom Shah</div>
+                <p class="text-gray-400 mb-6">Full-Stack Developer & UI/UX Designer</p>
+                <div class="flex justify-center space-x-6 mb-8">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </a>
+                </div>
+                <p class="text-gray-500 text-sm">
+                    © 2026 Hariom Shah. All rights reserved.
+                        <p class="text-gray-500 text-sm"></p>
+                     Designed & Developed by Self
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>
